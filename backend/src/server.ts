@@ -33,9 +33,9 @@ app.use(cors(options));
 app.use(passport.initialize());
 
 app.get("/", (_req, res) => {
-  res.send("<>Server is working</>");
+  res.send("<h1>Server is working</h1>");
 });
 
-app.listen(config.port, () => {
-  console.log(`server is running on port ${config.port}`);
+app.listen(config.serverPort, () => {
+  console.log(`server is running on port ${config.serverPort}`);
 });
