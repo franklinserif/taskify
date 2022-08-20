@@ -17,5 +17,9 @@
   "main": "src/index.js",
   "author": "Franklin Rodriguez <franklinserif@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
 }
