@@ -5,30 +5,37 @@
 import express from "express";
 import passport from "passport";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-import { TCorsOriginCallback } from "@/AppTypes";
+import config from "./config";
 
 const app = express();
 
 app.use(express.json());
 
-const whiteList = ["http://localhost:8080"];
+/**
+ * list of authorized domain - cors
+ * @constant
+ * @type {Array<string>}
+ * @default
+ */
+const whiteList: Array<string> = ["http://localhost:8080"];
 
 const options = {
-  origin: (origin: string, callback: TCorsOriginCallback) => {
-    if (whiteList.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("No authorized"));
-    }
-  },
+  origin: whiteList,
 };
 
+/**
+ * This object is for allow domain request
+ * it will include all whiteList domain
+ * @type {Object}
+ */
 app.use(cors(options));
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is running on port ${process.env.PORT}`);
+app.use(passport.initialize());
+
+app.get("/", (_req, res) => {
+  res.send("<>Server is working</>");
+});
+
+app.listen(config.port, () => {
+  console.log(`server is running on port ${config.port}`);
 });
