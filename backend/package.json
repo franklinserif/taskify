@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "name": "taskify-server",
+  "version": "1.0.0",
+  "description": "taskify server application",
+  "main": "src/index.js",
+  "author": "Franklin Rodriguez <franklinserif@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
