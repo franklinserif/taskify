@@ -7,7 +7,7 @@
  * @requires module:service/auth
  */
 
-import express, { RequestHandler } from "express";
+import express from "express";
 import passport from "passport";
 import AuthService from "../services";
 
