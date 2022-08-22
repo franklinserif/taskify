@@ -5,6 +5,9 @@
 
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
+/**
+ * Represent the user table
+ */
 @Entity()
 export class User {
   @PrimaryGeneratedColumn("uuid")
