@@ -1,5 +1,11 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,react,windows,linux,macos,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,react,windows,linux,macos,visualstudiocode
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+# Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,linux,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,windows,linux,macos
 
 ### Linux ###
 *~
@@ -189,19 +195,6 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-### react ###
-.DS_*
-**/*.backup.*
-**/*.back.*
-
-node_modules
-
-*.sublime*
-
-psd
-thumb
-sketch
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -253,7 +246,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# docker postgres volumes data folder
+# docker postgress database volumes
 postgres_data
 
-# End of https://www.toptal.com/developers/gitignore/api/node,react,windows,linux,macos,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,linux,macos
