@@ -7,6 +7,7 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import config from "./config";
+import { boomErrorHandler, ormErrorHandler } from "./middlewares/error.handler";
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -38,15 +39,17 @@ app.get("/", (_req, res) => {
   res.send("<h1>Hello taskify</h1>");
 });
 
+app.use(ormErrorHandler);
+
+app.use(boomErrorHandler);
+
 app.listen(config.serverPort, () => {
   // database initialize
   AppDataSource.initialize()
     .then(() => {
       if (config.env === "development") {
         console.log("database initialize...");
-        console.log(
-          `server running at http://localhost port ${config.serverPort}`
-        );
+        console.log(`server running at http://localhost port ${config.serverPort}`);
       }
     })
     .catch((error) => console.log(error));
