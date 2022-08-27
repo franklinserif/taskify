@@ -31,9 +31,7 @@ class UserService {
 
     user.save();
 
-    const { password, ...userWithoutPassword } = data;
-
-    return userWithoutPassword;
+    return user;
   }
 
   /**
