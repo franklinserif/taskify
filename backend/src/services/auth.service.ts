@@ -7,9 +7,10 @@
 import boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 import config from "../config";
-import service from "./user.service";
+import UserService from "./user.service";
+
+const service = new UserService();
 
 /**
  * This class define all methos for manage
@@ -32,8 +33,6 @@ class AuthService {
 
     if (!isMath) throw boom.unauthorized();
 
-    const { password: ps, ...userWithoutPassword } = user;
-
-    return userWithoutPassword;
+    return user;
   }
 }
