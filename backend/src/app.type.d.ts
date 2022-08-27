@@ -8,3 +8,8 @@ export interface IUser {
 export interface IDeleteResponse {
   delete: true;
 }
+
+export interface ISignTokeResponse {
+  user: IUser;
+  token: string;
+}
