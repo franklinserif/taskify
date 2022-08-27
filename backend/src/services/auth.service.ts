@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../config";
 import UserService from "./user.service";
+import { IUser, ISignTokeResponse } from "../app.type";
 
 const service = new UserService();
 
@@ -22,7 +23,7 @@ class AuthService {
    * @async
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<Object>}
+   * @returns {Promise<IUser>}
    */
   async getUser(email: string, password: string) {
     const user = await service.findByEmail(email);
@@ -35,4 +36,21 @@ class AuthService {
 
     return user;
   }
+
+  /**
+   * @async
+   * @param {IUser} user
+   * @returns {ISignTokeResponse}
+   */
+  signToken(user: IUser): ISignTokeResponse {
+    const payload = {
+      sub: user.email,
+    };
+
+    const token = jwt.sign(payload, config.jwtSecret as string);
+
+    return { user, token };
+  }
 }
+
+export default AuthService;
