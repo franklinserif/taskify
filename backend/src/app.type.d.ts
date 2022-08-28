@@ -13,3 +13,8 @@ export interface ISignTokeResponse {
   user: IUser;
   token: string;
 }
+
+export interface IUserLoginSchema {
+  email: string;
+  password: string;
+}

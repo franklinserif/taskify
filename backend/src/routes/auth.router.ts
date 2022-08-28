@@ -9,7 +9,8 @@
 
 import express from "express";
 import passport from "passport";
-import  validatorHandler  from "../middlewares/validator.handler";
+import validatorHandler from "../middlewares/validator.handler";
+import { userLoginSchema } from "schemas/user.schema";
 import { loginController } from "controllers/auth.controller";
 
 /**
@@ -25,7 +26,7 @@ const router = express.Router();
 router.post(
   "/login",
   passport.authenticate("local", { session: false }),
-  validatorHandler()
+  validatorHandler(userLoginSchema, "user"),
   loginController
 );
 

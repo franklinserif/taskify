@@ -3,6 +3,11 @@
  * @module schemas/user
  */
 
+import Ajv from "ajv";
+import { IUserLoginSchema } from "../app.type";
+
+const ajv = new Ajv({ allErrors: true });
+
 const firstName = { type: "string" };
 const lastName = { type: "string" };
 const email = { type: "string", format: "email" };
@@ -12,20 +17,20 @@ const password = { type: "string" };
  * DTO for login data validation
  * @constant
  */
-const userLoginSchema = {
+const userLoginSchema = ajv.compile<IUserLoginSchema>({
   type: "userLoginSchema",
   properties: {
     email,
     password,
   },
   required: ["email", "password"],
-};
+});
 
 /**
  * DTO for user register
  * @constant
  */
-const userRegisterSchema = {
+const userRegisterSchema = ajv.compile({
   type: "userRegisterSchema",
   properties: {
     firstName,
@@ -34,6 +39,6 @@ const userRegisterSchema = {
     password,
     required: ["firstName", "lastName", "email", "password"],
   },
-};
+});
 
 export { userLoginSchema, userRegisterSchema };

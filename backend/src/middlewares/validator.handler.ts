@@ -10,20 +10,18 @@ import boom from "@hapi/boom";
 /**
  * It will validate if the data is correct
  * depend of the schema
- * @param {Object} validator
+ * @param {Function} validator
  * @param {string} property
  * @returns {Function}
  */
-function validatorHandler(validator, property) {
+function validatorHandler(validator: any, property: string) {
   return (req: Request, res: Response, next: NextFunction) => {
     const data = req.body[property];
 
-    const { errors } = validator(data);
-
-    if (errors) {
-      next(boom.badRequest(errors));
-    } else {
+    if (validator(data)) {
       next();
+    } else {
+      next(validator.errors);
     }
   };
 }
