@@ -8,6 +8,7 @@ import { IUserLoginSchema } from "../app.type";
 
 const ajv = new Ajv({ allErrors: true });
 
+const id = { type: "string" };
 const firstName = { type: "string" };
 const lastName = { type: "string" };
 const email = { type: "string", format: "email" };
@@ -41,4 +42,12 @@ const userRegisterSchema = ajv.compile({
   },
 });
 
-export { userLoginSchema, userRegisterSchema };
+const userIdSchema = ajv.compile({
+  type: "userIdSchema",
+  properties: {
+    id,
+  },
+  required: ["id"],
+});
+
+export { userLoginSchema, userRegisterSchema, userIdSchema };
