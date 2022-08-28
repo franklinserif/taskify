@@ -3,13 +3,13 @@
  * @module db/entity/user
  */
 
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 /**
  * Represent the user table
  */
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -22,7 +22,7 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column()

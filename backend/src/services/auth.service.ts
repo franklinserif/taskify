@@ -7,9 +7,11 @@
 import boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 import config from "../config";
-import service from "./user.service";
+import UserService from "./user.service";
+import { IUser, ISignTokeResponse } from "../app.type";
+
+const service = new UserService();
 
 /**
  * This class define all methos for manage
@@ -21,7 +23,7 @@ class AuthService {
    * @async
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<Object>}
+   * @returns {Promise<IUser>}
    */
   async getUser(email: string, password: string) {
     const user = await service.findByEmail(email);
@@ -32,8 +34,23 @@ class AuthService {
 
     if (!isMath) throw boom.unauthorized();
 
-    const { password: ps, ...userWithoutPassword } = user;
+    return user;
+  }
 
-    return userWithoutPassword;
+  /**
+   * @async
+   * @param {IUser} user
+   * @returns {ISignTokeResponse}
+   */
+  signToken(user: IUser): ISignTokeResponse {
+    const payload = {
+      sub: user.email,
+    };
+
+    const token = jwt.sign(payload, config.jwtSecret as string);
+
+    return { user, token };
   }
 }
+
+export default AuthService;
