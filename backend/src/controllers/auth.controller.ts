@@ -11,7 +11,8 @@ import { IUser } from "../app.type";
 const service = new AuthService();
 
 /**
- *
+ * Login controller that handle
+ * all login request
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
