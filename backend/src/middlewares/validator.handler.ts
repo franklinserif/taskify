@@ -14,14 +14,16 @@ import boom from "@hapi/boom";
  * @param {string} property
  * @returns {Function}
  */
-function validatorHandler(validator: any, property: string) {
-  return (req: Request, res: Response, next: NextFunction) => {
+function validatorHandler(schema: any, property: string) {
+  return (req: Request, _res: Response, next: NextFunction) => {
     const data = req.body[property];
 
-    if (validator(data)) {
-      next();
+    const { error } = schema.validate(data, { abortEarly: true });
+
+    if (error) {
+      next(boom.badRequest(error));
     } else {
-      next(validator.errors);
+      next();
     }
   };
 }
