@@ -10,8 +10,8 @@
 import express from "express";
 import passport from "passport";
 import validatorHandler from "../middlewares/validator.handler";
-import { userLoginSchema } from "schemas/user.schema";
-import { loginController } from "controllers/auth.controller";
+import { userLoginSchema } from "../schemas/user.schema";
+import { loginController } from "../controllers/auth.controller";
 
 /**
  * Express router to mount auth related function on

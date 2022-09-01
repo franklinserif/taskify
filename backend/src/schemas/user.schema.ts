@@ -3,51 +3,64 @@
  * @module schemas/user
  */
 
-import Ajv from "ajv";
-import { IUserLoginSchema } from "../app.type";
-
-const ajv = new Ajv({ allErrors: true });
-
-const id = { type: "string" };
-const firstName = { type: "string" };
-const lastName = { type: "string" };
-const email = { type: "string", format: "email" };
-const password = { type: "string" };
+import Joi from "joi";
 
 /**
- * DTO for login data validation
+ * user's id
  * @constant
  */
-const userLoginSchema = ajv.compile<IUserLoginSchema>({
-  type: "userLoginSchema",
-  properties: {
-    email,
-    password,
-  },
-  required: ["email", "password"],
+const id = Joi.string().uuid();
+
+/**
+ * @constant
+ */
+const firstName = Joi.string();
+
+/**
+ * @constant
+ */
+const lastName = Joi.string();
+
+/**
+ * @constant
+ */
+
+const password = Joi.string().pattern(
+  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/
+);
+
+const email = Joi.string().email();
+
+/**
+ * Schema for validate user creation data
+ * @constant
+ * @type {Object}
+ */
+const createUserSchema = Joi.object({
+  firstName: firstName.required(),
+  lastName: lastName.required(),
+  password: password.required(),
+  email: email.required(),
 });
 
 /**
- * DTO for user register
+ * Schema for validate user update data
  * @constant
+ * @type {Object}
  */
-const userRegisterSchema = ajv.compile({
-  type: "userRegisterSchema",
-  properties: {
-    firstName,
-    lastName,
-    email,
-    password,
-    required: ["firstName", "lastName", "email", "password"],
-  },
+const updateUserSchema = Joi.object({
+  firstName,
+  lastName,
+  email,
 });
 
-const userIdSchema = ajv.compile({
-  type: "userIdSchema",
-  properties: {
-    id,
-  },
-  required: ["id"],
+/**
+ * Schema for validate get user by id
+ * @constant
+ * @type {Object}
+ */
+const getUserByIdSchema = Joi.object({
+  id,
 });
 
-export { userLoginSchema, userRegisterSchema, userIdSchema };
+export { createUserSchema, updateUserSchema, getUserByIdSchema };

@@ -7,6 +7,7 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import config from "./config";
+import routeApi from "./routes";
 import { boomErrorHandler, ormErrorHandler } from "./middlewares/error.handler";
 import { AppDataSource } from "./data-source";
 
@@ -35,13 +36,15 @@ app.use(express.json());
 
 app.use(passport.initialize());
 
+app.use(ormErrorHandler);
+
+app.use(boomErrorHandler);
+
 app.get("/", (_req, res) => {
   res.send("<h1>Hello taskify</h1>");
 });
 
-app.use(ormErrorHandler);
-
-app.use(boomErrorHandler);
+routeApi(app);
 
 app.listen(config.serverPort, () => {
   // database initialize
@@ -49,7 +52,9 @@ app.listen(config.serverPort, () => {
     .then(() => {
       if (config.env === "development") {
         console.log("database initialize...");
-        console.log(`server running at http://localhost port ${config.serverPort}`);
+        console.log(
+          `server running at http://localhost port ${config.serverPort}`
+        );
       }
     })
     .catch((error) => console.log(error));

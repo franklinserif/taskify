@@ -2,13 +2,13 @@
  * User routing module
  * @module routes/user
  */
-import validatorHandler from "@/middlewares/validator.handler";
-import { userRegisterSchema, userIdSchema } from "schemas/user.schema";
+import validatorHandler from "../middlewares/validator.handler";
+import { userRegisterSchema, userIdSchema } from "../schemas/user.schema";
 import {
   userRegisterController,
   userUpdateController,
   userDeleteController,
-} from "controllers/user.controller";
+} from "../controllers/user.controller";
 import express from "express";
 import passport from "passport";
 
@@ -19,7 +19,6 @@ const router = express.Router();
  */
 router.post(
   "/",
-  passport.authenticate("local", { session: false }),
   validatorHandler(userRegisterSchema, "body"),
   userRegisterController
 );
@@ -43,3 +42,5 @@ router.delete(
   validatorHandler(userIdSchema, "params"),
   userDeleteController
 );
+
+export default router;
