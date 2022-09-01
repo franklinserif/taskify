@@ -29,7 +29,15 @@ const password = Joi.string().pattern(
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/
 );
 
+/**
+ * @constant
+ */
 const email = Joi.string().email();
+
+/**
+ * @constant
+ */
+const isActive = Joi.boolean();
 
 /**
  * Schema for validate user creation data
@@ -52,6 +60,7 @@ const updateUserSchema = Joi.object({
   firstName,
   lastName,
   email,
+  isActive,
 });
 
 /**
