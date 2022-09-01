@@ -29,7 +29,6 @@ class AuthService {
     const user = await service.findByEmail(email);
 
     if (!user) throw boom.unauthorized();
-
     const isMath = bcrypt.compare(password, user.password);
 
     if (!isMath) throw boom.unauthorized();
@@ -47,7 +46,7 @@ class AuthService {
       sub: user.email,
     };
 
-    const token = jwt.sign(payload, config.jwtSecret as string);
+    const token = jwt.sign(payload, config.secretOrKey as string);
 
     return { user, token };
   }

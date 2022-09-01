@@ -24,8 +24,9 @@ export function loginController(
 ) {
   try {
     const { user } = req;
-
-    res.json(service.signToken(user as IUser));
+    if (user) {
+      res.json(service.signToken(user as IUser));
+    }
   } catch (error) {
     next(error);
   }

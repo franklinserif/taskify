@@ -29,20 +29,12 @@ const localStrategy = new Strategy(
   async (email: string, password: string, done) => {
     try {
       const user = await service.getUser(email, password);
+      console.log(`email: ${email}, password ${password}`);
+      if (!user) done(boom.unauthorized(), false);
 
-      if (!user) {
-        done(boom.unauthorized(), false);
-      }
-
-      const isMath = await bcrypt.compare(password, user.password);
-
-      if (!isMath) {
-        done(boom.unauthorized(), false);
-      }
-
-      done(null, true);
+      done(null, user);
     } catch (error) {
-      return done(error, false);
+      done(error, false);
     }
   }
 );

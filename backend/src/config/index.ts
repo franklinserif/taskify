@@ -24,7 +24,7 @@ const { NODE_ENV, PORT, JWT_SECRET, DB_NAME, DB_USER, DB_PASSWORD } =
 export default {
   env: NODE_ENV,
   serverPort: PORT,
-  jwtSecret: JWT_SECRET,
+  secretOrKey: JWT_SECRET,
   dbName: DB_NAME,
   dbUser: DB_USER,
   dbPassword: DB_PASSWORD,
