@@ -19,7 +19,12 @@ import { loginController } from "../controllers/auth.controller";
 const router = express.Router();
 
 /**
- * Route for login
+ * Route serving login
+ * @name get/login
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware - passport authentication method
+ * @param {callback} middleware - loginController
  */
 router.post(
   "/login",
