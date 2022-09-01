@@ -25,8 +25,8 @@ const lastName = Joi.string();
  * @constant
  */
 
-const password = Joi.string().pattern(
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/
+const password = Joi.string().regex(
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
 );
 
 /**

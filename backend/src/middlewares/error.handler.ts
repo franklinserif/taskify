@@ -26,7 +26,6 @@ export const boomErrorHandler: ErrorRequestHandler = (
 
     res.status(output.statusCode).json(output.payload);
   } else {
-    console.log(err);
     res.status(500).json({
       message: err.message,
       stack: err.stack,

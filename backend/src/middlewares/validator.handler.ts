@@ -4,7 +4,7 @@
  * @module middleware/validator
  * @requires boom
  */
-import { Response, Request, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import boom from "@hapi/boom";
 
 /**
@@ -15,10 +15,10 @@ import boom from "@hapi/boom";
  * @returns {Function}
  */
 function validatorHandler(schema: any, property: string) {
-  return (req: Request, _res: Response, next: NextFunction) => {
-    const data = req.body[property];
+  return (req: any, _res: Response, next: NextFunction) => {
+    const data = req[property];
 
-    const { error } = schema.validate(data, { abortEarly: true });
+    const { error } = schema.validate(data, { abortEarly: false });
 
     if (error) {
       next(boom.badRequest(error));
