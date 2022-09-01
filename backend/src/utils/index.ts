@@ -5,8 +5,8 @@
 
 import passport from "passport";
 
-import LocalStrategy from "./strategies/local.strategy";
-import JwtStrategry from "./strategies/jwt.strategy";
+import localStrategy from "./strategies/local.strategy";
+import jwtStrategry from "./strategies/jwt.strategy";
 
-passport.use(LocalStrategy);
-passport.use(JwtStrategry);
+passport.use(localStrategy);
+passport.use(jwtStrategry);

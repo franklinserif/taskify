@@ -10,6 +10,7 @@ import config from "./config";
 import routeApi from "./routes";
 import { boomErrorHandler, ormErrorHandler } from "./middlewares/error.handler";
 import { AppDataSource } from "./data-source";
+import "./utils/index";
 
 const app = express();
 

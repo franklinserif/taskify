@@ -7,12 +7,14 @@ import { Strategy, ExtractJwt } from "passport-jwt";
 
 import config from "../../config";
 
+console.log("secrect", config.jwtSecret);
+
 /**
  * @constant
  */
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secrectOrKey: config.jwtSecret,
+  secretOrKey: config.jwtSecret,
 };
 
 /**
