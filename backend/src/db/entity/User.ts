@@ -29,6 +29,12 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
+  @Column({ nullable: true })
+  jwt: string;
+
+  @Column({ nullable: true })
+  confirm_code: number;
+
   @Column({ select: false })
   password: string;
 

@@ -41,7 +41,7 @@ class AuthService {
    * @param {IUser} user
    * @returns {ISignTokeResponse}
    */
-  signToken(user: IUser): ISignTokeResponse {
+  async signToken(user: IUser): Promise<ISignTokeResponse> {
     const payload = {
       sub: user.email,
       id: user.id,
@@ -60,6 +60,8 @@ class AuthService {
         expiresIn: config.refreshTokenExpire,
       }
     );
+
+    await service.update(user.id, { jwt: refreshToken });
 
     return { accessToken, refreshToken };
   }

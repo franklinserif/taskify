@@ -12,7 +12,7 @@ import config from "../../../config";
  */
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: config.secretOrKey,
+  secretOrKey: config.refreshTokenSecret,
 };
 
 /**

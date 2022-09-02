@@ -5,6 +5,7 @@ export interface IUser extends Repository {
   id: string;
   firstName: string;
   lastName: string;
+  jwt: string;
   password: string;
   email: string;
 }

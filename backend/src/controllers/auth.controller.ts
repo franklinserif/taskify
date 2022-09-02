@@ -17,7 +17,7 @@ const service = new AuthService();
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function loginController(
+export async function loginController(
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,7 +25,7 @@ export function loginController(
   try {
     const { user } = req;
     if (user) {
-      res.json(service.signToken(user as IUser));
+      res.json(await service.signToken(user as IUser));
     }
   } catch (error) {
     next(error);
