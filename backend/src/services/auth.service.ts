@@ -49,11 +49,19 @@ class AuthService {
       lastName: user.lastName,
     };
 
-    const token = jwt.sign(payload, config.accessTokenSecret as string, {
+    const accessToken = jwt.sign(payload, config.accessTokenSecret as string, {
       expiresIn: config.accessTokenExpire,
     });
 
-    return { user, token };
+    const refreshToken = jwt.sign(
+      payload,
+      config.refreshTokenSecret as string,
+      {
+        expiresIn: config.refreshTokenExpire,
+      }
+    );
+
+    return { accessToken, refreshToken };
   }
 }
 

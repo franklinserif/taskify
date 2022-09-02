@@ -14,8 +14,8 @@ export interface IDeleteResponse {
 }
 
 export interface ISignTokeResponse {
-  user: IUser;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface IUserLoginSchema {
