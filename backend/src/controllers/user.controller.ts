@@ -11,21 +11,42 @@ import UserService from "../services/user.service";
 const service = new UserService();
 
 /**
- * User register controller
+ * get all users controller
  * @async
- * @param {Request} req
+ * @param {Request} _req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function userRegisterController(
+export async function getUsersController(
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const users = await service.find();
+
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * get user controller
+ * @async
+ * @param {Request} _req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getUserController(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const data: IUser = req.body;
+    const { id } = req.params;
 
-    const user = await service.create(data);
+    const user = await service.findOne(id);
 
     res.status(200).json(user);
   } catch (error) {
