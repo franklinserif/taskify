@@ -14,7 +14,7 @@ import {
   signupController,
 } from "../controllers/auth.controller";
 
-import validatorHandler from "@/middlewares/validator.handler";
+import validatorHandler from "../middlewares/validator.handler";
 import { createUserSchema } from "../schemas/user.schema";
 /**
  * Express router to mount auth related function on

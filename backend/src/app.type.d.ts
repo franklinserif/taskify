@@ -1,13 +1,18 @@
 import { User } from "./db/entity/User";
 import { Repository } from "typeorm";
 
-export interface IUser extends Repository {
+export interface IUser {
   id: string;
   firstName: string;
   lastName: string;
   jwt: string;
   password: string;
   email: string;
+}
+
+export interface IAuth {
+  access_token: string;
+  confirm_code: number;
 }
 
 export interface IDeleteResponse {

@@ -7,7 +7,7 @@
 import { Request, Response, NextFunction } from "express";
 import { IUser } from "../app.type";
 import AuthService from "../services/auth.service";
-import UserService from "@/services/user.service";
+import UserService from "../services/user.service";
 
 const authService = new AuthService();
 const userService = new UserService();

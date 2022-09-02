@@ -8,6 +8,7 @@
 import boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 import { User } from "../db/entity/User";
+import { Auth } from "db/entity/Auth";
 import { IUser } from "../app.type";
 /**
  * This class will define all methods for manipule
@@ -87,6 +88,17 @@ class UserService {
     if (!newUser) throw boom.notFound();
 
     return newUser;
+  }
+
+  async updateAccessToken(email: string, refreshToken: string) {
+    const user = await User.findOneBy({ email });
+    if (!user) throw boom.notFound();
+
+    const newAuth = new Auth();
+
+    newAuth.refreshToken = refreshToken;
+
+    user.auth = newAuth;
   }
 
   /**

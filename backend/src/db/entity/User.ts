@@ -10,7 +10,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Auth } from "./Auth";
 
 /**
  * Represent the user table
@@ -26,14 +29,11 @@ export class User extends BaseEntity {
   @Column()
   lastName: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column({ nullable: true })
   jwt: string;
-
-  @Column({ nullable: true })
-  confirm_code: number;
 
   @Column({ select: false })
   password: string;
@@ -41,9 +41,13 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isActive: boolean;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @OneToOne(() => Auth)
+  @JoinColumn()
+  auth: Auth;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
 }

@@ -61,7 +61,7 @@ class AuthService {
       }
     );
 
-    await service.update(user.id, { jwt: refreshToken });
+    await service.updateAccessToken(user.email, refreshToken);
 
     return { accessToken, refreshToken };
   }
