@@ -14,8 +14,15 @@ dotenv.config();
 /**
  * variables inside .env file loaded
  */
-const { NODE_ENV, PORT, JWT_SECRET, DB_NAME, DB_USER, DB_PASSWORD } =
-  process.env;
+const {
+  NODE_ENV,
+  PORT,
+  JWT_SECRET,
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  ACCESS_TOKEN_EXPIRE,
+} = process.env;
 
 /**
  * It contains all enviroment variables
@@ -28,4 +35,5 @@ export default {
   dbName: DB_NAME,
   dbUser: DB_USER,
   dbPassword: DB_PASSWORD,
+  acessTokenExpire: ACCESS_TOKEN_EXPIRE,
 };

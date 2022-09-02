@@ -5,7 +5,7 @@
 
 import { Strategy, ExtractJwt } from "passport-jwt";
 
-import config from "../../config";
+import config from "../../../config";
 
 /**
  * @constant

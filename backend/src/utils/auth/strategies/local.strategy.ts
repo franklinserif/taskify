@@ -6,7 +6,7 @@ import { Strategy } from "passport-local";
 import bcrypt from "bcrypt";
 import boom from "@hapi/boom";
 
-import AuthService from "../../services/auth.service";
+import AuthService from "../../../services/auth.service";
 
 const service = new AuthService();
 
