@@ -32,13 +32,13 @@ export async function getUsersController(
 }
 
 /**
- * get user controller
+ * get user profile controller
  * @async
  * @param {Request} _req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function getUserController(
+export async function getUserProfileController(
   req: Request,
   res: Response,
   next: NextFunction
