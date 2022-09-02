@@ -30,8 +30,8 @@ class UserService {
     user.password = hash;
 
     user.save();
-
-    return user;
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 
   /**
