@@ -3,13 +3,8 @@
  * @module routes/user
  */
 import validatorHandler from "../middlewares/validator.handler";
+import { getUserByIdSchema, updateUserSchema } from "../schemas/user.schema";
 import {
-  createUserSchema,
-  getUserByIdSchema,
-  updateUserSchema,
-} from "../schemas/user.schema";
-import {
-  userRegisterController,
   userUpdateController,
   userDeleteController,
 } from "../controllers/user.controller";
@@ -22,20 +17,6 @@ import passport from "passport";
  * @constant
  */
 const router = express.Router();
-
-/**
- * Route serving user creation endpoint
- * @name post/user
- * @function
- * @param {string} path - Express path
- * @param {callback} middleware - validatorHandler
- * @param {callback} middleware - userRegisterController
- */
-router.post(
-  "/",
-  validatorHandler(createUserSchema, "body"),
-  userRegisterController
-);
 
 /**
  * Route serving user update endpoint

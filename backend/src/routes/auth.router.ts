@@ -9,8 +9,13 @@
 
 import express from "express";
 import passport from "passport";
-import { loginController } from "../controllers/auth.controller";
+import {
+  signinController,
+  signupController,
+} from "../controllers/auth.controller";
 
+import validatorHandler from "@/middlewares/validator.handler";
+import { createUserSchema } from "../schemas/user.schema";
 /**
  * Express router to mount auth related function on
  * @type {Router}
@@ -19,17 +24,31 @@ import { loginController } from "../controllers/auth.controller";
 const router = express.Router();
 
 /**
- * Route serving login
+ * Route serving signin
  * @name get/login
  * @function
  * @param {string} path - Express path
  * @param {callback} middleware - passport authentication method
- * @param {callback} middleware - loginController
+ * @param {callback} middleware - singinController
  */
 router.post(
-  "/login",
+  "/signin",
   passport.authenticate("local", { session: false }),
-  loginController
+  signinController
+);
+
+/**
+ * Route serving signup
+ * @name get/login
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -
+ * @param {callback} middleware - singupController
+ */
+router.post(
+  "/signup",
+  validatorHandler(createUserSchema, "body"),
+  signupController
 );
 
 export default router;

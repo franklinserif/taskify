@@ -19,7 +19,7 @@ const userService = new UserService();
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function loginController(
+export async function signinController(
   req: Request,
   res: Response,
   next: NextFunction
@@ -41,7 +41,7 @@ export async function loginController(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function userRegisterController(
+export async function signupController(
   req: Request,
   res: Response,
   next: NextFunction
