@@ -1,4 +1,8 @@
-export interface IUser {
+import { User } from "./db/entity/User";
+import { Repository } from "typeorm";
+
+export interface IUser extends Repository {
+  id: string;
   firstName: string;
   lastName: string;
   password: string;
