@@ -3,7 +3,14 @@
  * @module db/entity/user
  */
 
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BaseEntity,
+} from "typeorm";
 
 /**
  * Represent the user table
@@ -27,4 +34,10 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isActive: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
