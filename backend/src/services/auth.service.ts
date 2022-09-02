@@ -44,9 +44,14 @@ class AuthService {
   signToken(user: IUser): ISignTokeResponse {
     const payload = {
       sub: user.email,
+      id: user.id,
+      fistName: user.firstName,
+      lastName: user.lastName,
     };
 
-    const token = jwt.sign(payload, config.secretOrKey as string);
+    const token = jwt.sign(payload, config.accessTokenSecret as string, {
+      expiresIn: config.accessTokenExpire,
+    });
 
     return { user, token };
   }

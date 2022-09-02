@@ -17,11 +17,13 @@ dotenv.config();
 const {
   NODE_ENV,
   PORT,
-  JWT_SECRET,
   DB_NAME,
   DB_USER,
   DB_PASSWORD,
   ACCESS_TOKEN_EXPIRE,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+  REFRESH_TOKEN_EXPIRE,
 } = process.env;
 
 /**
@@ -31,9 +33,11 @@ const {
 export default {
   env: NODE_ENV,
   serverPort: PORT,
-  secretOrKey: JWT_SECRET,
+  accessTokenSecret: ACCESS_TOKEN_SECRET,
+  accessTokenExpire: ACCESS_TOKEN_EXPIRE,
+  refreshTokenSecret: REFRESH_TOKEN_SECRET,
+  refreshTokenExpire: REFRESH_TOKEN_EXPIRE,
   dbName: DB_NAME,
   dbUser: DB_USER,
   dbPassword: DB_PASSWORD,
-  acessTokenExpire: ACCESS_TOKEN_EXPIRE,
 };
