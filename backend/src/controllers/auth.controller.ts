@@ -13,8 +13,8 @@ const authService = new AuthService();
 const userService = new UserService();
 
 /**
- * Login controller that handle
- * all login request
+ * Signin controller that handle
+ * all signin request
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
@@ -26,6 +26,7 @@ export async function signinController(
 ) {
   try {
     const { user } = req;
+
     if (user) {
       res.json(await authService.signToken(user as IUser));
     }

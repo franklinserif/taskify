@@ -25,7 +25,7 @@ const router = express.Router();
 
 /**
  * Route serving signin
- * @name get/login
+ * @name get/signin
  * @function
  * @param {string} path - Express path
  * @param {callback} middleware - passport authentication method

@@ -5,7 +5,7 @@ export interface IUser {
   id: string;
   firstName: string;
   lastName: string;
-  jwt: string;
+  refreshToken: string;
   password: string;
   email: string;
 }

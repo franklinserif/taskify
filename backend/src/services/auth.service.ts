@@ -26,10 +26,11 @@ class AuthService {
    * @returns {Promise<IUser>}
    */
   async getUser(email: string, password: string) {
-    const user = await service.findByEmail(email);
+    const user = await service.findOne(email);
 
     if (!user) throw boom.unauthorized();
-    const isMath = bcrypt.compare(password, user.password);
+
+    const isMath = bcrypt.compare(password, user!.password as string);
 
     if (!isMath) throw boom.unauthorized();
 
@@ -45,8 +46,6 @@ class AuthService {
     const payload = {
       sub: user.email,
       id: user.id,
-      fistName: user.firstName,
-      lastName: user.lastName,
     };
 
     const accessToken = jwt.sign(payload, config.accessTokenSecret as string, {
@@ -61,7 +60,7 @@ class AuthService {
       }
     );
 
-    await service.updateAccessToken(user.email, refreshToken);
+    await service.update(user.email, { refreshToken });
 
     return { accessToken, refreshToken };
   }

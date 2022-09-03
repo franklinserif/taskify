@@ -3,7 +3,6 @@
  * @module utils/strategies/local
  */
 import { Strategy } from "passport-local";
-import bcrypt from "bcrypt";
 import boom from "@hapi/boom";
 
 import AuthService from "../../../services/auth.service";
@@ -29,7 +28,7 @@ const localStrategy = new Strategy(
   async (email: string, password: string, done) => {
     try {
       const user = await service.getUser(email, password);
-      console.log(`email: ${email}, password ${password}`);
+
       if (!user) done(boom.unauthorized(), false);
 
       done(null, user);

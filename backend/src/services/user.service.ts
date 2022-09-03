@@ -8,7 +8,7 @@
 import boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 import { User } from "../db/entity/User";
-import { Auth } from "db/entity/Auth";
+import { AppDataSource } from "../data-source";
 import { IUser } from "../app.type";
 /**
  * This class will define all methods for manipule
@@ -49,13 +49,15 @@ class UserService {
   /**
    * Search user by he's id
    * @async
-   * @param {string} id
+   * @param {string} email
    * @returns {IUser}
    */
-  async findOne(id: string) {
-    const user = User.createQueryBuilder()
-      .addSelect("user.password")
-      .where("user.id = id", { id });
+  async findOne(email: string) {
+    const user = await AppDataSource.getRepository(User)
+      .createQueryBuilder("user")
+      .select(["user.password", "user.email", "user.id"])
+      .where("user.email = :email", { email })
+      .getOne();
 
     if (!user) boom.notFound();
 
@@ -82,23 +84,12 @@ class UserService {
    * @param {Partial<IUser>} user
    * @returns {{delete: true}}
    */
-  async update(id: string, user: Partial<IUser>) {
-    const newUser = User.update({ id }, { ...user });
+  async update(email: string, user: Partial<IUser>) {
+    const newUser = User.update({ email }, { ...user });
 
     if (!newUser) throw boom.notFound();
 
     return newUser;
-  }
-
-  async updateAccessToken(email: string, refreshToken: string) {
-    const user = await User.findOneBy({ email });
-    if (!user) throw boom.notFound();
-
-    const newAuth = new Auth();
-
-    newAuth.refreshToken = refreshToken;
-
-    user.auth = newAuth;
   }
 
   /**
