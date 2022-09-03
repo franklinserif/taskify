@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../config";
 import UserService from "./user.service";
-import { IUser, ISignTokeResponse } from "../app.type";
+import { IUser, ISignTokeResponse, IConfirmCode } from "../app.type";
 
 const service = new UserService();
 
@@ -63,6 +63,25 @@ class AuthService {
     await service.update(user.email, { refreshToken });
 
     return { accessToken, refreshToken };
+  }
+
+  /**
+   * Confirm code
+   * @async
+   * @param {IConfirmCode} data
+   */
+  async confirmCode(data: IConfirmCode) {
+    const user = await service.findByEmail(data.email);
+
+    if (user?.confirmCode === data.confirmCode) {
+      user.isActive = true;
+      user.confirmCode = 0;
+      user?.save();
+    } else {
+      throw boom.notFound();
+    }
+
+    return { complete: true };
   }
 }
 

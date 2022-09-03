@@ -12,10 +12,14 @@ import passport from "passport";
 import {
   signinController,
   signupController,
+  confirmCodeController,
 } from "../controllers/auth.controller";
 
 import validatorHandler from "../middlewares/validator.handler";
-import { createUserSchema } from "../schemas/user.schema";
+import {
+  createUserSchema,
+  confirmCodeUserSchema,
+} from "../schemas/user.schema";
 /**
  * Express router to mount auth related function on
  * @type {Router}
@@ -49,6 +53,20 @@ router.post(
   "/signup",
   validatorHandler(createUserSchema, "body"),
   signupController
+);
+
+/**
+ * Route serving signup
+ * @name get/login
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -
+ * @param {callback} middleware - singupController
+ */
+router.post(
+  "/confirm-code",
+  validatorHandler(confirmCodeUserSchema, "body"),
+  confirmCodeController
 );
 
 export default router;

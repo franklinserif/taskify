@@ -85,7 +85,7 @@ class UserService {
    * @returns {{delete: true}}
    */
   async update(email: string, user: Partial<IUser>) {
-    const newUser = User.update({ email }, { ...user });
+    const newUser = User.update({ email }, user);
 
     if (!newUser) throw boom.notFound();
 

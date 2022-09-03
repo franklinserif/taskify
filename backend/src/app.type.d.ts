@@ -5,14 +5,15 @@ export interface IUser {
   id: string;
   firstName: string;
   lastName: string;
+  confirmCode: number;
   refreshToken: string;
   password: string;
   email: string;
 }
 
-export interface IAuth {
-  access_token: string;
-  confirm_code: number;
+export interface IConfirmCode {
+  confirmCode: number;
+  email: string;
 }
 
 export interface IDeleteResponse {

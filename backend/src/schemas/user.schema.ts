@@ -82,6 +82,7 @@ const getUserByIdSchema = Joi.object({
  */
 const confirmCodeUserSchema = Joi.object({
   confirmCode: confirmCode.required(),
+  email: email.required(),
 });
 
 export {

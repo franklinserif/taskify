@@ -5,7 +5,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { IUser } from "../app.type";
+import { IUser, IConfirmCode } from "../app.type";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 
@@ -51,6 +51,29 @@ export async function signupController(
     const data: IUser = req.body;
 
     const user = await userService.create(data);
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * User confirm code controller
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function confirmCodeController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const data: IConfirmCode = req.body;
+
+    const user = authService.confirmCode(data);
 
     res.status(200).json(user);
   } catch (error) {
