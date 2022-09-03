@@ -83,6 +83,12 @@ class AuthService {
 
     return { complete: true };
   }
+
+  /**
+   * Generate random code
+   * @async
+   */
+  async forgotPassword() {}
 }
 
 export default AuthService;
