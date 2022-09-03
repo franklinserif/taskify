@@ -40,6 +40,11 @@ const email = Joi.string().email();
 const isActive = Joi.boolean();
 
 /**
+ * @constant
+ */
+const confirmCode = Joi.number();
+
+/**
  * Schema for validate user creation data
  * @constant
  * @type {Object}
@@ -72,4 +77,16 @@ const getUserByIdSchema = Joi.object({
   id,
 });
 
-export { createUserSchema, updateUserSchema, getUserByIdSchema };
+/**
+ * Schema for validate confrmCode
+ */
+const confirmCodeUserSchema = Joi.object({
+  confirmCode: confirmCode.required(),
+});
+
+export {
+  createUserSchema,
+  updateUserSchema,
+  getUserByIdSchema,
+  confirmCodeUserSchema,
+};
