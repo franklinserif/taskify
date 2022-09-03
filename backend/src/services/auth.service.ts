@@ -5,6 +5,7 @@
  */
 
 import boom from "@hapi/boom";
+import generateRandomCode from "../utils/random/generateRandomCode";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../config";
@@ -87,8 +88,11 @@ class AuthService {
   /**
    * Generate random code
    * @async
+   * @param {string} email
    */
-  async forgotPassword() {}
+  async forgotPassword(email: string) {
+    const confirmCode = await generateRandomCode();
+  }
 }
 
 export default AuthService;
