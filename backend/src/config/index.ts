@@ -24,6 +24,10 @@ const {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRE,
+  MAIL_PASSWORD,
+  MAIL_EMAIL,
+  MAIL_HOST,
+  MAIL_PORT,
 } = process.env;
 
 /**
@@ -40,4 +44,8 @@ export default {
   dbName: DB_NAME,
   dbUser: DB_USER,
   dbPassword: DB_PASSWORD,
+  mailEmail: MAIL_EMAIL,
+  mailPassword: MAIL_PASSWORD,
+  mailHost: MAIL_HOST,
+  mailPort: MAIL_PORT,
 };
