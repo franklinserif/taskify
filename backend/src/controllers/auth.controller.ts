@@ -80,3 +80,26 @@ export async function confirmCodeController(
     next(error);
   }
 }
+
+/**
+ * User forget password controller
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function forgetPasswordController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const email: string = req.body;
+
+    const rta = authService.forgotPassword(email);
+
+    res.status(201).json(rta);
+  } catch (error) {
+    next(error);
+  }
+}
