@@ -90,9 +90,16 @@ class AuthService {
    * @async
    * @param {string} email
    */
-  async forgotPassword(email: string) {
-    const confirmCode = await generateRandomCode();
+  async forgotPassword(email: string): Promise<boolean> {
+    const confirmCode = generateRandomCode();
+
+    const user = await service.findByEmail(email);
+
+    if (user) {
+      user.confirmCode = confirmCode;
+      user.save();
+    }
+    return true;
   }
 }
-
 export default AuthService;
