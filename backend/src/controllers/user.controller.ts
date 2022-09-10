@@ -5,7 +5,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { IUser } from "../app.type";
+import { IUser } from "../index.type";
 import UserService from "../services/user.service";
 
 const service = new UserService();

@@ -10,7 +10,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../config";
 import UserService from "./user.service";
-import { IUser, ISignTokeResponse, IConfirmCode } from "../app.type";
+import { IUser, ISignTokeResponse, IConfirmCode } from "../index.type";
 
 const service = new UserService();
 

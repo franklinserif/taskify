@@ -5,7 +5,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { IUser, IConfirmCode } from "../app.type";
+import { IUser, IConfirmCode } from "../index.type";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 

@@ -9,7 +9,7 @@ import boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 import { User } from "../db/entity/User";
 import { AppDataSource } from "../data-source";
-import { IUser } from "../app.type";
+import { IUser } from "../index.type";
 /**
  * This class will define all methods for manipule
  * data in the database table
