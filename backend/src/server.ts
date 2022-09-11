@@ -37,15 +37,15 @@ app.use(express.json());
 
 app.use(passport.initialize());
 
-app.use(ormErrorHandler);
-
-app.use(boomErrorHandler);
-
 app.get("/", (_req, res) => {
   res.send("<h1>Hello taskify</h1>");
 });
 
 routeApi(app);
+
+app.use(ormErrorHandler);
+
+app.use(boomErrorHandler);
 
 app.listen(config.serverPort, () => {
   // database initialize

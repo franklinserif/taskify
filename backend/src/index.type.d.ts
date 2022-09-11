@@ -12,7 +12,7 @@ export interface IUser {
 }
 
 export interface IConfirmCode {
-  confirmCode: number;
+  code: number;
   email: string;
 }
 

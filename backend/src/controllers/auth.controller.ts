@@ -73,7 +73,7 @@ export async function confirmCodeController(
   try {
     const data: IConfirmCode = req.body;
 
-    const user = authService.confirmCode(data);
+    const user = await authService.confirmCode(data);
 
     res.status(200).json(user);
   } catch (error) {
@@ -94,7 +94,7 @@ export async function createConfirmCodeController(
   next: NextFunction
 ) {
   try {
-    const email: string = req.body;
+    const { email } = req.body;
 
     const rta = authService.createCode(email);
 
