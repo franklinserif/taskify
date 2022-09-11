@@ -13,12 +13,14 @@ import {
   signinController,
   signupController,
   confirmCodeController,
+  createConfirmCodeController,
 } from "../controllers/auth.controller";
 
 import validatorHandler from "../middlewares/validator.handler";
 import {
   createUserSchema,
   confirmCodeUserSchema,
+  createCodeUserSchema,
 } from "../schemas/user.schema";
 /**
  * Express router to mount auth related function on
@@ -56,7 +58,7 @@ router.post(
 );
 
 /**
- * Route serving signup
+ * Route serving confirm code
  * @name get/login
  * @function
  * @param {string} path - Express path
@@ -69,4 +71,17 @@ router.post(
   confirmCodeController
 );
 
+/**
+ * Route serving createCode
+ * @name post/createcode
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware
+ * @param {callback} middleware
+ */
+router.post(
+  "/create-code",
+  validatorHandler(createCodeUserSchema, "body"),
+  createConfirmCodeController
+);
 export default router;
