@@ -90,7 +90,7 @@ class AuthService {
    * @async
    * @param {string} email
    */
-  async forgotPassword(email: string): Promise<boolean> {
+  async createCode(email: string): Promise<boolean> {
     const confirmCode = generateRandomCode();
 
     const user = await service.findByEmail(email);
