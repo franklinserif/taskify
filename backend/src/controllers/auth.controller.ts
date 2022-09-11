@@ -5,7 +5,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { IUser, IConfirmCode } from "../index.type";
+import { IUser, IConfirmCode, INewPasswordData } from "../index.type";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 
@@ -73,16 +73,16 @@ export async function confirmCodeController(
   try {
     const data: IConfirmCode = req.body;
 
-    const user = await authService.confirmCode(data);
+    const rta = await authService.confirmCode(data);
 
-    res.status(200).json(user);
+    res.status(200).json({ complete: rta.complete });
   } catch (error) {
     next(error);
   }
 }
 
 /**
- * User forget password controller
+ * User create confirmation code controller
  * @async
  * @param {Request} req
  * @param {Response} res
@@ -96,7 +96,29 @@ export async function createConfirmCodeController(
   try {
     const { email } = req.body;
 
-    const rta = authService.createCode(email);
+    const rta = await authService.createCode(email);
+
+    res.status(201).json(rta);
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * User change password controller
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function changePasswordController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const data: INewPasswordData = req.body;
+    const rta = await authService.changeUserPassword(data);
 
     res.status(201).json(rta);
   } catch (error) {

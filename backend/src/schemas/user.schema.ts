@@ -92,10 +92,20 @@ const createCodeUserSchema = Joi.object({
   email: email.required(),
 });
 
+/**
+ * Schema for validate change password
+ */
+const changeUserPasswordSchema = Joi.object({
+  email: email.required(),
+  code: code.required(),
+  newPassword: password.required(),
+});
+
 export {
   createUserSchema,
   updateUserSchema,
   getUserByIdSchema,
   confirmCodeUserSchema,
   createCodeUserSchema,
+  changeUserPasswordSchema,
 };

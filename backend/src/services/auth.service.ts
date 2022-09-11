@@ -10,7 +10,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../config";
 import UserService from "./user.service";
-import { IUser, ISignTokeResponse, IConfirmCode } from "../index.type";
+import {
+  IUser,
+  ISignTokeResponse,
+  IConfirmCode,
+  INewPasswordData,
+} from "../index.type";
 import sendEmail from "../utils/mail";
 
 const service = new UserService();
@@ -32,7 +37,7 @@ class AuthService {
 
     if (!user) throw boom.unauthorized();
 
-    const isMath = bcrypt.compare(password, user!.password as string);
+    const isMath = await bcrypt.compare(password, user!.password as string);
 
     if (!isMath) throw boom.unauthorized();
 
@@ -83,13 +88,14 @@ class AuthService {
       throw boom.unauthorized("invalid code");
     }
 
-    return { complete: true };
+    return { complete: true, user };
   }
 
   /**
    * Generate random code
    * @async
    * @param {string} email
+   * @returns {boolean}
    */
   async createCode(email: string): Promise<boolean> {
     const confirmCode = generateRandomCode();
@@ -107,6 +113,23 @@ class AuthService {
       });
     }
     return true;
+  }
+
+  /**
+   * Change user password
+   * @async
+   * @param {INewPasswordData} data
+   * @returns {boolean}
+   */
+  async changeUserPassword(data: INewPasswordData) {
+    const { user } = await this.confirmCode(data);
+
+    const newHashPassword = await bcrypt.hash(data.newPassword, 10);
+
+    user.password = newHashPassword;
+    user.save();
+
+    return { complete: true, message: "password has been change" };
   }
 }
 export default AuthService;

@@ -14,6 +14,7 @@ import {
   signupController,
   confirmCodeController,
   createConfirmCodeController,
+  changePasswordController,
 } from "../controllers/auth.controller";
 
 import validatorHandler from "../middlewares/validator.handler";
@@ -21,6 +22,7 @@ import {
   createUserSchema,
   confirmCodeUserSchema,
   createCodeUserSchema,
+  changeUserPasswordSchema,
 } from "../schemas/user.schema";
 /**
  * Express router to mount auth related function on
@@ -66,7 +68,7 @@ router.post(
  * @param {callback} middleware - singupController
  */
 router.post(
-  "/confirm-code",
+  "/code/confirm",
   validatorHandler(confirmCodeUserSchema, "body"),
   confirmCodeController
 );
@@ -75,13 +77,28 @@ router.post(
  * Route serving createCode
  * @name post/createcode
  * @function
- * @param {string} path - Express path
+ * @param {string[]} path - Express path
  * @param {callback} middleware
  * @param {callback} middleware
  */
 router.post(
-  "/create-code",
+  ["/code/new", "/password/forgot"],
   validatorHandler(createCodeUserSchema, "body"),
   createConfirmCodeController
 );
+
+/**
+ * Route serving change password
+ * @name post/createcode
+ * @function
+ * @param {string[]} path - Express path
+ * @param {callback} middleware
+ * @param {callback} middleware
+ */
+router.post(
+  "/password/new",
+  validatorHandler(changeUserPasswordSchema, "body"),
+  changePasswordController
+);
+
 export default router;

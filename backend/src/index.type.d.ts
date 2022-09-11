@@ -36,3 +36,9 @@ export interface IMail {
   text: string;
   html: string;
 }
+
+export interface INewPasswordData {
+  email: string;
+  code: number;
+  newPassword: string;
+}
