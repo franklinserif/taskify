@@ -7,6 +7,9 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import config from "./config";
+import swaggerUi from "swagger-ui-express";
+import swaggerSetup from "./docs/swagger";
+
 import routeApi from "./routes";
 import { boomErrorHandler, ormErrorHandler } from "./middlewares/error.handler";
 import { AppDataSource } from "./data-source";
@@ -46,6 +49,8 @@ routeApi(app);
 app.use(ormErrorHandler);
 
 app.use(boomErrorHandler);
+
+app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 
 app.listen(config.serverPort, () => {
   // database initialize
