@@ -23,7 +23,7 @@ export const boomErrorHandler: ErrorRequestHandler = (
 ): void => {
   if (err.isBoom) {
     const { output } = err;
-    console.log("boom error: ", output);
+
     res.status(output.statusCode).json(output.payload);
   } else {
     res.status(500).json({

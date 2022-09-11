@@ -11,6 +11,7 @@ import jwt from "jsonwebtoken";
 import config from "../config";
 import UserService from "./user.service";
 import { IUser, ISignTokeResponse, IConfirmCode } from "../index.type";
+import sendEmail from "../utils/mail";
 
 const service = new UserService();
 
@@ -75,7 +76,7 @@ class AuthService {
     const user = await service.findByEmail(data.email);
 
     if (user?.confirmCode === data.code && data.code !== 0) {
-      user.isActive = true;
+      !user.isActive && (user.isActive = true);
       user.confirmCode = 0;
       user?.save();
     } else {
@@ -97,6 +98,13 @@ class AuthService {
     if (user) {
       user.confirmCode = confirmCode;
       user.save();
+
+      await sendEmail({
+        to: [email],
+        subject: "confirmation code",
+        html: `${confirmCode}`,
+        text: `${confirmCode}`,
+      });
     }
     return true;
   }

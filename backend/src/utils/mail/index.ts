@@ -23,15 +23,13 @@ let transporter = nodemailer.createTransport({
  */
 const sendEmail = async (mail: IMail) => {
   // send mail with defined transport object
-  let info = await transporter.sendMail({
+  await transporter.sendMail({
     from: '"Taskify 👻" <franklinserif@gmail.com>', // sender address
     to: mail.to.join(", "), // list of receivers
     subject: mail.subject, // Subject line
-    text: mail.text, // plain text body
-    html: mail.html, // html body
+    // text: mail.text, // plain text body
+    html: `<div style="display: flex; justify-content: center; flex-direction: column"> <h2>${mail.html}</h2>`, // html body
   });
-
-  console.log("mail info:", info.accepted);
 };
 
 export default sendEmail;
