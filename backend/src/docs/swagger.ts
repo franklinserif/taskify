@@ -5,8 +5,10 @@ const swaggerDefinition: OAS3Definition = {
   info: {
     title: "Taskify API documentation",
     version: "1.0.0",
+    description:
+      "Taskify backend api, this is the main docs for the taskify server api, it contains all the information to connect to the api, all routes and schemas",
   },
-  server: [
+  servers: [
     {
       url: "http://localhost:3000",
     },
