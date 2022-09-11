@@ -88,7 +88,7 @@ export async function confirmCodeController(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function forgetPasswordController(
+export async function createConfirmCodeController(
   req: Request,
   res: Response,
   next: NextFunction
@@ -96,7 +96,7 @@ export async function forgetPasswordController(
   try {
     const email: string = req.body;
 
-    const rta = authService.forgotPassword(email);
+    const rta = authService.createCode(email);
 
     res.status(201).json(rta);
   } catch (error) {
