@@ -85,9 +85,17 @@ const confirmCodeUserSchema = Joi.object({
   email: email.required(),
 });
 
+/**
+ * Schema for validate create code
+ */
+const createCodeUserSchema = Joi.object({
+  email: email.required(),
+});
+
 export {
   createUserSchema,
   updateUserSchema,
   getUserByIdSchema,
   confirmCodeUserSchema,
+  createCodeUserSchema,
 };
