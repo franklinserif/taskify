@@ -10,7 +10,7 @@ const swaggerDefinition: OAS3Definition = {
   },
   servers: [
     {
-      url: "http://localhost:3000",
+      url: "http://localhost:3000/api/v1",
     },
   ],
   components: {
@@ -21,6 +21,18 @@ const swaggerDefinition: OAS3Definition = {
       },
     },
     schemas: {
+      signinUserSchema: {
+        type: "object",
+        required: ["email", "password"],
+        properties: {
+          email: {
+            type: "string",
+          },
+          password: {
+            type: "string",
+          },
+        },
+      },
       createUserSchema: {
         type: "object",
         required: ["firstName", "lastName", "password", "email"],
