@@ -143,15 +143,6 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
-      getWorkspaceByIdSchema: {
-        type: "object",
-        required: ["id"],
-        properties: {
-          id: {
-            type: "string",
-          },
-        },
-      },
     },
   },
 };
