@@ -7,10 +7,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
 } from "typeorm";
+
+import { List } from "./List";
 
 /**
  * Represent the user table
@@ -40,6 +43,9 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isActive: boolean;
+
+  @OneToMany(() => List, (list) => list.user)
+  list: List[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

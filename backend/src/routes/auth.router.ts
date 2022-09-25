@@ -58,32 +58,6 @@ router.post(
 );
 
 /**
- * Serving signin with google route
- * @openapi
- * /auth/signin:
- *    post:
- *      tags:
- *        - auth
- *      summary: "Signin with google"
- *      description: Signin auth user
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/signinUserSchema"
- *      responses:
- *        '200':
- *          description: it will response with the access token and refresh token.
- *        '401':
- *          description: user not found or unauthorized.
- */
-router.post(
-  "/google/signin",
-  passport.authenticate("google", { scope: ["profile"] }),
-  signinController
-);
-
-/**
  * Serving signun route
  * @openapi
  * /auth/signun:
