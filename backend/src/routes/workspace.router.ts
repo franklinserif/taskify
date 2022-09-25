@@ -34,11 +34,6 @@ const router = express.Router();
  *        - workspace
  *      summary: "get all workspace "
  *      description: get all workspace routes
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/getUserByIdEmail"
  *      responses:
  *        '200':
  *          description: response with a lit of workspaces .
@@ -56,17 +51,19 @@ router.get(
 /**
  * Serving get workspace by id
  * @openapi
- * /workspace:
+ * /workspace/:id:
  *    get:
  *      tags:
  *        - workspace
  *      summary: "get workspace by id "
+ *      parameters:
+ *        - in: path
+ *          name: workspaceId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the workspace
  *      description: get workspace by id
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/getUserByIdEmail"
  *      responses:
  *        '200':
  *          description: get workspace by id.
@@ -86,16 +83,16 @@ router.get(
  * Serving creation workspace endpoint
  * @openapi
  * /workspace:
- *    get:
+ *    post:
  *      tags:
  *        - workspace
- *      summary: "create workspace "
+ *      summary: "create workspace"
  *      description: create a new workspace
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
- *                $ref: "#/components/schemas/getUserByIdEmail"
+ *                $ref: "#/components/schemas/createWorkspaceSchema"
  *      responses:
  *        '200':
  *          description: response with the workspace information .
@@ -114,19 +111,24 @@ router.post(
 /**
  * Serving workspace update information route
  * @openapi
- * /workspace:
+ * /workspace/:id:
  *    patch:
  *      tags:
  *        - workspace
  *      summary: "workspace update information"
  *      description: workspace update information route
+ *      parameters:
+ *        - in: path
+ *          name: workspaceId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the workspace to update
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
- *                allOf:
- *                  - $ref: "#/components/schemas/getUserByIdSchema"
- *                  - $ref: "#/components/schemas/updateUserSchema"
+ *                  - $ref: "#/components/schemas/updateWorkspaceSchema"
  *      responses:
  *        '201':
  *          description: response with workspace information .
@@ -151,12 +153,14 @@ router.patch(
  *      tags:
  *        - workspace
  *      summary: "workspace delete route"
+ *      parameters:
+ *        - in: path
+ *          name: workspaceId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the workspace to delete
  *      description: workspace delete all from db
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/getUserByIdSchema"
  *      responses:
  *        '200':
  *          description: response with true .

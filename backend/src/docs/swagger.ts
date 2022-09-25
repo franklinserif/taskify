@@ -117,6 +117,41 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
+      createWorkspaceSchema: {
+        type: "object",
+        required: ["email", "name", "description"],
+        properties: {
+          email: {
+            type: "string",
+          },
+          name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          },
+        },
+      },
+      updateWorkspaceSchema: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          },
+        },
+      },
+      getWorkspaceByIdSchema: {
+        type: "object",
+        required: ["id"],
+        properties: {
+          id: {
+            type: "string",
+          },
+        },
+      },
     },
   },
 };
