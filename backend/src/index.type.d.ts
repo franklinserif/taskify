@@ -42,3 +42,8 @@ export interface INewPasswordData {
   code: number;
   newPassword: string;
 }
+
+export interface IWorkspace {
+  name: string;
+  description: string;
+}
