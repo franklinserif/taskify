@@ -11,13 +11,36 @@ import WorkspaceService from "../services/Workspace.service";
 const service = new WorkspaceService();
 
 /**
- * get all workspace controller
+ * get workspace by id controller
  * @async
  * @param {Request} _req
  * @param {Response} res
  * @param {NextFunction} next
  */
 export async function getWorkspaceController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { id } = req.params;
+
+    const workspace = await service.findOne(id);
+
+    res.status(200).json(workspace);
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * get all workspace controller
+ * @async
+ * @param {Request} _req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getWorkspaceByIdController(
   _req: Request,
   res: Response,
   next: NextFunction
