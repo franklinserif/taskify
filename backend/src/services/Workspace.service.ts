@@ -56,7 +56,10 @@ class WorkspaceService {
    * @returns {IWorkspace}
    */
   async findOne(id: string) {
-    const workspace = await Workspace.findOne({ where: { id } });
+    const workspace = await Workspace.findOne({
+      where: { id },
+      relations: ["lists"],
+    });
 
     if (!workspace) throw boom.notFound();
 
