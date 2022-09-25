@@ -23,10 +23,17 @@ const name = Joi.string();
 const description = Joi.string();
 
 /**
+ * owner email address
+ * @constant
+ */
+const email = Joi.string();
+
+/**
  * Schema for validate data for workspace
  * creation
  */
 const createWorkspaceSchema = Joi.object({
+  email: email.required(),
   name: name.required(),
   description: description.required(),
 });
