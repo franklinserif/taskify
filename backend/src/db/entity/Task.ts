@@ -1,6 +1,6 @@
 /**
- * list typeorm entity
- * @module db/entity/list
+ * User typeorm entity
+ * @module db/entity/user
  */
 
 import {
@@ -10,33 +10,34 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
-  OneToMany,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 
+import { List } from "./List";
 import { User } from "./User";
-import { Task } from "./Task";
-import { Workspace } from "./Workpace";
 
 /**
- * Represent the list table
+ * Represent the task table
  */
 @Entity()
-export class List extends BaseEntity {
+export class Task extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
 
-  @ManyToOne(() => User, (user) => user.lists)
-  user: User;
+  @Column()
+  description: string;
 
-  @ManyToOne(() => Workspace, (workspace) => workspace.lists)
-  workspace: Workspace;
+  @ManyToOne(() => List, (list) => list.tasks)
+  list: List;
 
-  @OneToMany(() => Task, (task) => task.list)
-  tasks: Task[];
+  @ManyToMany(() => User)
+  @JoinTable()
+  users: User[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

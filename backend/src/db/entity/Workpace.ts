@@ -1,42 +1,41 @@
 /**
- * list typeorm entity
- * @module db/entity/list
+ * User typeorm entity
+ * @module db/entity/workspace
  */
 
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  OneToMany,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
-  OneToMany,
-  ManyToOne,
 } from "typeorm";
 
+import { List } from "./List";
 import { User } from "./User";
-import { Task } from "./Task";
-import { Workspace } from "./Workpace";
 
 /**
- * Represent the list table
+ * Represent the workspace table
  */
 @Entity()
-export class List extends BaseEntity {
+export class Workspace extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
 
+  @Column()
+  description: string;
+
   @ManyToOne(() => User, (user) => user.lists)
   user: User;
 
-  @ManyToOne(() => Workspace, (workspace) => workspace.lists)
-  workspace: Workspace;
-
-  @OneToMany(() => Task, (task) => task.list)
-  tasks: Task[];
+  @OneToMany(() => List, (list) => list.workspace)
+  lists: List[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

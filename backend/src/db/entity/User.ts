@@ -14,6 +14,7 @@ import {
 } from "typeorm";
 
 import { List } from "./List";
+import { Workspace } from "./Workpace";
 
 /**
  * Represent the user table
@@ -45,7 +46,10 @@ export class User extends BaseEntity {
   isActive: boolean;
 
   @OneToMany(() => List, (list) => list.user)
-  list: List[];
+  lists: List[];
+
+  @OneToMany(() => Workspace, (workspace) => workspace.user)
+  workspaces: Workspace[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
