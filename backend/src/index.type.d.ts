@@ -7,7 +7,7 @@ export interface IUser {
   lastName: string;
   confirmCode: number;
   refreshToken: string;
-  password: string;
+  password?: string;
   email: string;
 }
 

@@ -21,14 +21,16 @@ class UserService {
    * @param {IUser} data
    * @returns {Promise<Pick<IUser, "email" | "firstName" | "lastName">>}
    */
-  async create(data: IUser) {
+  async create(data: Partial<IUser>) {
     const user = new User();
-    const hash = await bcrypt.hash(data.password, 10);
+    if (data.password) {
+      const hash = await bcrypt.hash(data.password, 10);
+      user.password = hash;
+    }
 
-    user.firstName = data.firstName;
-    user.lastName = data.lastName;
-    user.email = data.email;
-    user.password = hash;
+    user.firstName = data.firstName as string;
+    user.lastName = data.lastName as string;
+    user.email = data.email as string;
 
     user.save();
     const { password, ...userWithoutPassword } = user;

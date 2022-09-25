@@ -28,6 +28,8 @@ const {
   MAIL_EMAIL,
   MAIL_HOST,
   MAIL_PORT,
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID,
 } = process.env;
 
 /**
@@ -48,4 +50,6 @@ export default {
   mailPassword: MAIL_PASSWORD,
   mailHost: MAIL_HOST,
   mailPort: MAIL_PORT,
+  googleClientId: GOOGLE_CLIENT_ID,
+  googleClientSecret: GOOGLE_CLIENT_SECRET,
 };
