@@ -25,19 +25,17 @@ class WorkspaceService {
    * @returns {Promise<IWorkspace>}
    */
   async create(userEmail: string, data: IWorkspace) {
-    const user = await service.findByEmail(userEmail);
+    const Owner = await service.findByEmail(userEmail);
 
     const newWorkspace = new Workspace();
-    if (!user) throw boom.notFound();
+    if (!Owner) throw boom.notFound();
 
     newWorkspace.name = data.name;
     newWorkspace.description = data.description;
+    newWorkspace.user = Owner;
     newWorkspace.save();
-
-    user.workspaces = [newWorkspace, ...user.workspaces];
-    user.save();
-
-    return newWorkspace;
+    const { user, ...workspaceData } = newWorkspace;
+    return workspaceData;
   }
 
   /**
@@ -88,11 +86,11 @@ class WorkspaceService {
    * @returns {{delete: true}}
    */
   async update(id: string, workspace: Partial<IWorkspace>) {
-    const newWorkspace = Workspace.update({ id }, workspace);
+    const workspaceUpdated = await Workspace.update({ id }, workspace);
 
-    if (!newWorkspace) throw boom.notFound();
+    if (!workspaceUpdated) throw boom.notFound();
 
-    return newWorkspace;
+    return workspaceUpdated;
   }
 
   /**
