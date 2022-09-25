@@ -10,6 +10,7 @@ import {
 } from "../schemas/workspace.schema";
 import {
   getWorkspaceController,
+  getWorkspaceByIdController,
   workspaceUpdateController,
   workspaceDeleteController,
   workspaceCreateController,
@@ -51,6 +52,36 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   getWorkspaceController
 );
+
+/**
+ * Serving get workspace by id
+ * @openapi
+ * /workspace:
+ *    get:
+ *      tags:
+ *        - workspace
+ *      summary: "get workspace by id "
+ *      description: get workspace by id
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/getUserByIdEmail"
+ *      responses:
+ *        '200':
+ *          description: get workspace by id.
+ *        '401':
+ *          description: user not found or unauthorized.
+ *      security:
+ *       - bearerAuth: []
+ */
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  validatorHandler(getWorkspaceByIdSchema, "params"),
+  getWorkspaceByIdController
+);
+
 /**
  * Serving creation workspace endpoint
  * @openapi
