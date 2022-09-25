@@ -73,6 +73,14 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
+      getUserByIdEmail: {
+        type: "object",
+        properties: {
+          email: {
+            type: "string",
+          },
+        },
+      },
       confirmCodeSchema: {
         type: "object",
         required: ["code", "email"],

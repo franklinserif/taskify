@@ -21,27 +21,55 @@ import passport from "passport";
 const router = express.Router();
 
 /**
- * Route serving users endpoint
- * @name patch/user
- * @function
- * @param {string} path - Express path
- * @param {callback} middleware - passport Authentication
- * @param {callback} middleware - getUsersController
+ * Serving user profile route
+ * @openapi
+ * /user/profile:
+ *    get:
+ *      tags:
+ *        - user
+ *      summary: "user/profile"
+ *      description: user profile
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/getUserByIdEmail"
+ *      responses:
+ *        '200':
+ *          description: response with user profile information .
+ *        '401':
+ *          description: user not found or unauthorized.
+ *      security:
+ *       - bearerAuth: []
  */
-router.patch(
-  "/",
+router.get(
+  "/Profile",
   passport.authenticate("local", { session: false }),
   getUsersController
 );
-
 /**
- * Route serving user profile endpoint
- * @name patch/user
- * @function
- * @param {string} path - Express path
- * @param {callback} middleware - passport Authentication
- * @param {callback} middleware - validatorHandler id
- * @param {callback} middleware - getuserProfileController
+ * Serving user update information route
+ * @openapi
+ * /user:
+ *    patch:
+ *      tags:
+ *        - user
+ *      summary: "user update information"
+ *      description: user profile
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                allOf:
+ *                  - $ref: "#/components/schemas/getUserByIdSchema"
+ *                  - $ref: "#/components/schemas/updateUserSchema"
+ *      responses:
+ *        '200':
+ *          description: response with user profile information .
+ *        '401':
+ *          description: user not found or unauthorized.
+ *      security:
+ *       - bearerAuth: []
  */
 router.patch(
   "/",
@@ -51,31 +79,26 @@ router.patch(
 );
 
 /**
- * Route serving user update endpoint
- * @name patch/user
- * @function
- * @param {string} path - Express path
- * @param {callback} middleware - passport Authentication
- * @param {callback} middleware - validatorHandler id
- * @param {callback} middleware - validatorHandler update
- * @param {callback} middleware - userUpdateController
- */
-router.patch(
-  "/",
-  passport.authenticate("local", { session: false }),
-  validatorHandler(getUserByIdSchema, "params"),
-  validatorHandler(updateUserSchema, "body"),
-  userUpdateController
-);
-
-/**
- * Route serving user delete endpoint
- * @name delete/user
- * @function
- * @param {string} path - Express path
- * @param {callback} middleware - passport Authentication
- * @param {callback} middleware - validatiorHandler id
- * @param {callback} middleware - userDeleteController
+ * Serving user delete route
+ * @openapi
+ * /user:
+ *    delete:
+ *      tags:
+ *        - user
+ *      summary: "user/profile"
+ *      description: user delete
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/getUserByIdSchema"
+ *      responses:
+ *        '200':
+ *          description: response with true .
+ *        '401':
+ *          description: user not found or unauthorized.
+ *      security:
+ *       - bearerAuth: []
  */
 router.delete(
   "/",

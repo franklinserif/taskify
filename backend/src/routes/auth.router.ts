@@ -50,8 +50,6 @@ const router = express.Router();
  *          description: it will response with the access token and refresh token.
  *        '401':
  *          description: user not found or unauthorized.
- *      security:
- *       - bearerAuth: []
  */
 router.post(
   "/signin",
