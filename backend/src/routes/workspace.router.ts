@@ -128,7 +128,7 @@ router.post(
  *          content:
  *            application/json:
  *              schema:
- *                  - $ref: "#/components/schemas/updateWorkspaceSchema"
+ *                $ref: "#/components/schemas/updateWorkspaceSchema"
  *      responses:
  *        '201':
  *          description: response with workspace information .
