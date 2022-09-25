@@ -44,8 +44,8 @@ const router = express.Router();
  */
 router.get(
   "/Profile",
-  passport.authenticate("local", { session: false }),
-  getUsersController
+  passport.authenticate("jwt", { session: false }),
+  getUserProfileController
 );
 /**
  * Serving user update information route
@@ -73,9 +73,10 @@ router.get(
  */
 router.patch(
   "/",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   validatorHandler(getUserByIdSchema, "params"),
-  getUserProfileController
+  validatorHandler(updateUserSchema, "body"),
+  userUpdateController
 );
 
 /**
@@ -102,7 +103,7 @@ router.patch(
  */
 router.delete(
   "/",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   validatorHandler(getUserByIdSchema, "params"),
   userDeleteController
 );
