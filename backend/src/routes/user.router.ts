@@ -23,17 +23,19 @@ const router = express.Router();
 /**
  * Serving user profile route
  * @openapi
- * /user/profile:
+ * /user/profile/:id:
  *    get:
  *      tags:
  *        - user
  *      summary: "user/profile"
+ *      parameters:
+ *        - in: path
+ *          name: userId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the user
  *      description: user profile
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/getUserByIdEmail"
  *      responses:
  *        '200':
  *          description: response with user profile information .
@@ -43,8 +45,9 @@ const router = express.Router();
  *       - bearerAuth: []
  */
 router.get(
-  "/Profile",
+  "/Profile/:id",
   passport.authenticate("jwt", { session: false }),
+  validatorHandler(getUserByIdSchema, "params"),
   getUserProfileController
 );
 /**
@@ -55,14 +58,19 @@ router.get(
  *      tags:
  *        - user
  *      summary: "user update information"
+ *      parameters:
+ *        - in: path
+ *          name: userId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the user
  *      description: user profile
  *      requestBody:
  *          content:
  *            application/json:
  *              schema:
- *                allOf:
- *                  - $ref: "#/components/schemas/getUserByIdSchema"
- *                  - $ref: "#/components/schemas/updateUserSchema"
+ *                $ref: "#/components/schemas/updateUserSchema"
  *      responses:
  *        '200':
  *          description: response with user profile information .
@@ -72,7 +80,7 @@ router.get(
  *       - bearerAuth: []
  */
 router.patch(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   validatorHandler(getUserByIdSchema, "params"),
   validatorHandler(updateUserSchema, "body"),
@@ -88,11 +96,13 @@ router.patch(
  *        - user
  *      summary: "user/profile"
  *      description: user delete
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/getUserByIdSchema"
+ *      parameters:
+ *        - in: path
+ *          name: userId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: id of the user
  *      responses:
  *        '200':
  *          description: response with true .
@@ -102,7 +112,7 @@ router.patch(
  *       - bearerAuth: []
  */
 router.delete(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   validatorHandler(getUserByIdSchema, "params"),
   userDeleteController
