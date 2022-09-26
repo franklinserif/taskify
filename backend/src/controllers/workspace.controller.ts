@@ -6,7 +6,7 @@
 
 import { Request, Response, NextFunction } from "express";
 import { IWorkspace } from "../index.type";
-import WorkspaceService from "../services/Workspace.service";
+import WorkspaceService from "../services/workspace.service";
 
 const service = new WorkspaceService();
 
