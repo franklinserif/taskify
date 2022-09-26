@@ -29,6 +29,9 @@ export class List extends BaseEntity {
   @Column()
   name: string;
 
+  @Column()
+  color: string;
+
   @ManyToOne(() => User, (user) => user.lists)
   user: User;
 
