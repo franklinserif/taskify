@@ -47,3 +47,8 @@ export interface IWorkspace {
   name: string;
   description: string;
 }
+
+export interface IList {
+  name: string;
+  color: string;
+}
