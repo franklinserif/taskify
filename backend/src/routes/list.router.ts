@@ -92,7 +92,7 @@ router.get(
  *          content:
  *            application/json:
  *              schema:
- *                $ref: "#/components/schemas/createlistSchema"
+ *                $ref: "#/components/schemas/createListSchema"
  *      responses:
  *        '200':
  *          description: response with the list information .
@@ -128,7 +128,7 @@ router.post(
  *          content:
  *            application/json:
  *              schema:
- *                $ref: "#/components/schemas/updatelistSchema"
+ *                $ref: "#/components/schemas/updateListSchema"
  *      responses:
  *        '201':
  *          description: response with list information .
