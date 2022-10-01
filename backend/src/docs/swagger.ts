@@ -143,6 +143,29 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
+      createListSchema: {
+        type: "object",
+        required: ["email", "name", "description"],
+        properties: {
+          name: {
+            type: "string",
+          },
+          color: {
+            type: "string",
+          },
+        },
+      },
+      updateListSchema: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+          },
+          color: {
+            type: "string",
+          },
+        },
+      },
     },
   },
 };
