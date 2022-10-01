@@ -1,6 +1,6 @@
 /**
- * User routing module
- * @module routes/user
+ * Workspace routing module
+ * @module routes/workspace
  */
 import validatorHandler from "../middlewares/validator.handler";
 import {
