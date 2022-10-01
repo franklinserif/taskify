@@ -52,3 +52,8 @@ export interface IList {
   name: string;
   color: string;
 }
+
+export interface ITask {
+  name: string;
+  description: string;
+}
