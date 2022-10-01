@@ -17,7 +17,7 @@ const service = new taskService();
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function gettaskController(
+export async function getTaskController(
   req: Request,
   res: Response,
   next: NextFunction
@@ -40,13 +40,13 @@ export async function gettaskController(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function gettaskByIdController(
+export async function getTaskByIdController(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    // list id
+    // task id
     const { id } = req.params;
 
     const tasks = await service.find(id);
