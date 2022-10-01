@@ -8,7 +8,6 @@
 import boom from "@hapi/boom";
 import { IList } from "../index.type";
 import { List } from "../db/entity/List";
-import { User } from "db/entity/User";
 import WorkspaceService from "./workspace.service";
 
 const workspaceService = new WorkspaceService();
@@ -69,21 +68,6 @@ class ListService {
     if (!list) throw boom.notFound();
 
     return list;
-  }
-
-  /**
-   * Search list by owner email address
-   * @async
-   * @param {string} email owner email address
-   * @return {Promise<IList>}
-   */
-  async findWorkspaceByUserEmail(email: string) {
-    const user = await User.findOne({
-      where: { email: email },
-      relations: ["lists"],
-    });
-
-    return user?.lists;
   }
 
   /**
