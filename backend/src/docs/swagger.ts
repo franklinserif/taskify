@@ -166,6 +166,29 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
+      createTaskSchema: {
+        type: "object",
+        required: ["email", "name", "description"],
+        properties: {
+          name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          },
+        },
+      },
+      updateTaskSchema: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          },
+        },
+      },
     },
   },
 };
