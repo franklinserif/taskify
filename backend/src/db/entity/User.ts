@@ -7,7 +7,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   ManyToMany,
   CreateDateColumn,
   UpdateDateColumn,
@@ -15,7 +14,6 @@ import {
   JoinTable,
 } from "typeorm";
 
-import { List } from "./List";
 import { Workspace } from "./Workpace";
 
 /**
@@ -46,9 +44,6 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isActive: boolean;
-
-  @OneToMany(() => List, (list) => list.user)
-  lists: List[];
 
   @ManyToMany(() => Workspace)
   @JoinTable()

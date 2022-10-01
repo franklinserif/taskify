@@ -14,7 +14,6 @@ import {
   ManyToOne,
 } from "typeorm";
 
-import { User } from "./User";
 import { Task } from "./Task";
 import { Workspace } from "./Workpace";
 
@@ -31,9 +30,6 @@ export class List extends BaseEntity {
 
   @Column()
   color: string;
-
-  @ManyToOne(() => User, (user) => user.lists)
-  user: User;
 
   @ManyToOne(() => Workspace, (workspace) => workspace.lists)
   workspace: Workspace;
