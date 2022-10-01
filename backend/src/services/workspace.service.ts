@@ -25,17 +25,19 @@ class WorkspaceService {
    * @returns {Promise<IWorkspace>}
    */
   async create(userEmail: string, data: IWorkspace) {
-    const Owner = await service.findByEmail(userEmail);
+    const owner = await service.findByEmail(userEmail);
 
     const newWorkspace = new Workspace();
-    if (!Owner) throw boom.notFound();
+    if (!owner) throw boom.notFound();
 
     newWorkspace.name = data.name;
     newWorkspace.description = data.description;
-    newWorkspace.user = Owner;
+
+    owner.workspaces.push(newWorkspace);
+    owner.save();
     newWorkspace.save();
-    const { user, ...workspaceData } = newWorkspace;
-    return workspaceData;
+
+    return newWorkspace;
   }
 
   /**
