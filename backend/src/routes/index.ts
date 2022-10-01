@@ -12,6 +12,8 @@ import express, { Express } from "express";
 import userRoutes from "./user.router";
 import authRoutes from "./auth.router";
 import workspaceRoutes from "./workspace.router";
+import listRouter from "./list.router";
+import taskRouter from "./task.router";
 
 /**
  * Setup all routes and add o the main app
@@ -24,6 +26,8 @@ function routeApi(app: Express): void {
   router.use("/user", userRoutes);
   router.use("/auth", authRoutes);
   router.use("/workspace", workspaceRoutes);
+  router.use("/list", listRouter);
+  router.use("/task", taskRouter);
 
   app.use("/api/v1", router);
 }
