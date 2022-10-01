@@ -1,6 +1,6 @@
 /**
- * This module will define the schema validation for users
- * @module schemas/user
+ * This module will define the schema validation for workspace
+ * @module schemas/workspace
  */
 
 import Joi from "joi";
