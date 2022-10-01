@@ -8,9 +8,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  ManyToMany,
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  JoinTable,
 } from "typeorm";
 
 import { List } from "./List";
@@ -48,7 +50,8 @@ export class User extends BaseEntity {
   @OneToMany(() => List, (list) => list.user)
   lists: List[];
 
-  @OneToMany(() => Workspace, (workspace) => workspace.user)
+  @ManyToMany(() => Workspace)
+  @JoinTable()
   workspaces: Workspace[];
 
   @CreateDateColumn({ name: "created_at" })

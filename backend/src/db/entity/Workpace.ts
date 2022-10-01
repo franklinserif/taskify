@@ -15,7 +15,6 @@ import {
 } from "typeorm";
 
 import { List } from "./List";
-import { User } from "./User";
 
 /**
  * Represent the workspace table
@@ -30,9 +29,6 @@ export class Workspace extends BaseEntity {
 
   @Column()
   description: string;
-
-  @ManyToOne(() => User, (user) => user.lists)
-  user: User;
 
   @OneToMany(() => List, (list) => list.workspace)
   lists: List[];
